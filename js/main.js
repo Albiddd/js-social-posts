@@ -139,8 +139,24 @@ posts.forEach((post) => {
 
 let likesCounter = 0;
 const dataLikes = [];
+
 const likeButtons = document.querySelectorAll('.like-button');
+console.log(likeButtons)
+const likeCounter = document.querySelectorAll('.js-likes-counter')
 
+for (let i = 0; i < posts.length; i++) {
+    likeButtons[i].addEventListener('click', function(){
 
-
-
+        if (likeCounter[i].innerHTML == posts[i].likes) {
+            posts[i].any++
+            likeCounter[i].innerHTML++    
+        // BONUS 3 DECREMENTO IL LIKE SE GIÁ PRESENTE
+        } else {
+            posts[i].any--
+            likeCounter[i].innerHTML--      
+        }
+    
+        likeButtons[i].classList.toggle('like-button--liked');
+        
+    });
+};
