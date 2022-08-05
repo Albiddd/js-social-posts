@@ -58,11 +58,17 @@ const posts = [
 
 const postsListEl = document.querySelector('.posts-list');
 
-posts.forEach((post) => {
+posts.forEach((post, i) => {
 
-    // BONUS GENERO LE INIZIALI DEL NOME E COGNOME
+    // BONUS: GENERO LE INIZIALI DEL NOME E COGNOME
     let authorArray = post.author.name.split(" ");
     let initial = authorArray[0][0] + authorArray[authorArray.length - 1][0];
+
+    // BONUS: FORMATTAZIONE DATA IN ITALIANO
+    let dateArray = posts[i].created.split("-");
+    console.log(dateArray)
+    let itaDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+
 
     if(post.author.image !== null){
     postsListEl.innerHTML += `
@@ -74,7 +80,7 @@ posts.forEach((post) => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${post.author.name}</div>
-                        <div class="post-meta__time">${post.created}</div>
+                        <div class="post-meta__time">${itaDate}</div>
                     </div>                    
                 </div>
             </div>
@@ -108,7 +114,7 @@ posts.forEach((post) => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${post.author.name}</div>
-                        <div class="post-meta__time">${post.created}</div>
+                        <div class="post-meta__time">${itaDate}</div>
                     </div>                    
                 </div>
             </div>
@@ -137,9 +143,6 @@ posts.forEach((post) => {
 });
 
 
-let likesCounter = 0;
-const dataLikes = [];
-
 const likeButtons = document.querySelectorAll('.like-button');
 console.log(likeButtons)
 const likeCounter = document.querySelectorAll('.js-likes-counter')
@@ -150,7 +153,7 @@ for (let i = 0; i < posts.length; i++) {
         if (likeCounter[i].innerHTML == posts[i].likes) {
             posts[i].any++
             likeCounter[i].innerHTML++    
-        // BONUS 3 DECREMENTO IL LIKE SE GIÁ PRESENTE
+        // BONUS 3: DECREMENTO IL LIKE SE GIÁ PRESENTE
         } else {
             posts[i].any--
             likeCounter[i].innerHTML--      
